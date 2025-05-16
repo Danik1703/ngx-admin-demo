@@ -1,0 +1,17 @@
+<div class="coin-search">
+  <nb-form-field class="search-field">
+    <nb-icon icon="search-outline" pack="eva" class="search-icon"></nb-icon>
+    <input
+      nbInput
+      placeholder="🔍 Шукати криптовалюту..."
+      [(ngModel)]="query"
+      (keyup.enter)="onSearch()"
+      class="search-input"
+      autocomplete="off"
+    />
+  </nb-form-field>
+
+  <button nbButton status="primary" (click)="onSearch()" class="search-button">
+    🔎 Пошук
+  </button>
+</div>

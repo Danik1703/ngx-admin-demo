@@ -1,0 +1,306 @@
+:host {
+  display: block;
+}
+
+.crypto-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-bottom: 2rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.crypto-card {
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 1rem; 
+}
+
+.crypto-card:hover {
+  box-shadow: 0 10px 28px rgba(51, 102, 255, 0.28);
+  transform: translateY(-5px);
+}
+
+.crypto-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.crypto-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(0, 214, 143, 0.35);
+  background-color: #f5f8ff;
+  object-fit: contain;
+  transition: box-shadow 0.3s ease;
+}
+
+.crypto-card:hover .crypto-icon {
+  box-shadow: 0 0 20px rgba(0, 214, 143, 0.6);
+}
+
+.crypto-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.price-current {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.price-up {
+  color: var(--accent-color);
+  animation: priceUp 0.5s ease-in-out forwards;
+}
+
+.price-down {
+  color: var(--danger-color);
+  animation: priceDown 0.5s ease-in-out forwards;
+}
+
+@keyframes priceUp {
+  0% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes priceDown {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.market-stats {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.progress-bar {
+  background-color: #dbe4ff;
+  border-radius: 16px;
+  height: 10px;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 0.6rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00d68f, #3366ff);
+  transition: width 0.6s ease;
+  border-radius: 16px 0 0 16px;
+}
+
+.card-footer {
+  margin-top: auto;
+  padding-top: 1rem; 
+  text-align: right;
+}
+
+
+.btn-primary-outline {
+  border: 2px solid var(--primary-color);
+  background: transparent;
+  color: var(--primary-color);
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.35s ease, color 0.35s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.btn-primary-outline:hover,
+.btn-primary-outline:focus {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 0 12px var(--primary-color);
+  outline: none;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+.header-corporate {
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 64px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.logo-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px var(--primary-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px var(--primary-color);
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #222;
+  letter-spacing: 1.2px;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+
+.logo-container:hover .logo-text {
+  color: #111;
+}
+
+.search-container {
+  max-width: 380px;
+  flex-grow: 1;
+  margin-left: 2rem;
+}
+
+.search-container nb-form-field {
+  width: 100%;
+}
+
+.search-container input[nbInput] {
+  border-radius: var(--border-radius);
+  padding: 0.65rem 1.1rem;
+  font-size: 1rem;
+  border: none;
+  box-shadow: 0 0 10px rgba(51, 102, 255, 0.25);
+  transition: box-shadow 0.3s ease;
+}
+
+.search-container input[nbInput]:focus {
+  box-shadow: 0 0 16px var(--primary-color);
+  outline: none;
+}
+
+.footer-corporate {
+  background-color: var(--primary-color);
+  text-align: center;
+  padding: 1.5rem 1rem;
+  color: white;
+  font-size: 0.95rem;
+  user-select: none;
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer-corporate a {
+  color: #cce0ff;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+
+.footer-corporate a:hover,
+.footer-corporate a:focus {
+  color: #fff;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .header-corporate {
+    padding: 0 1rem;
+  }
+
+  .search-container {
+    margin-left: 1rem;
+    max-width: 250px;
+  }
+
+  .crypto-list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .crypto-card-header {
+    gap: 0.8rem;
+  }
+
+  .crypto-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .crypto-name {
+    font-size: 1.1rem;
+  }
+
+  .btn-primary-outline {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.9rem;
+  }
+}

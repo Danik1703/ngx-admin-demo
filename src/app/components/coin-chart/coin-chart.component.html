@@ -1,0 +1,60 @@
+<nb-card *ngIf="loading" status="info" size="small" class="mb-3">
+  <nb-card-body class="d-flex align-items-center gap-3">
+    <nb-spinner size="medium" status="primary"></nb-spinner>
+    <span class="text-primary fs-5 fw-semibold">Завантаження даних...</span>
+  </nb-card-body>
+</nb-card>
+
+<nb-alert *ngIf="error" status="danger" [closable]="false" class="mb-3 fs-6">
+  {{ error }}
+</nb-alert>
+
+<button class="back-button" (click)="goBack()">⬅️ Назад на головну</button>
+
+<nb-card size="small" class="mb-4 p-3">
+  <nb-card-header class="nb-card-header">Налаштування графіка</nb-card-header>
+  <nb-card-body>
+    <div class="selector">
+      <label for="currency-select">Валюта:</label>
+      <select id="currency-select" [(ngModel)]="selectedCurrency" (change)="onCurrencyChange()">
+        <option *ngFor="let cur of currencies" [value]="cur.value">{{ cur.label }}</option>
+      </select>
+    </div>
+    <div class="selector">
+      <label for="period-select">Період:</label>
+      <select id="period-select" [(ngModel)]="selectedPeriod" (change)="onPeriodChange()">
+        <option *ngFor="let period of periods" [value]="period.value">{{ period.label }}</option>
+      </select>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card class="mb-4 chart-container">
+  <nb-card-header class="nb-card-header d-flex justify-content-between align-items-center">
+    <span>Динаміка ціни</span>
+    <nb-badge status="primary" [text]="selectedCurrency.toUpperCase()"></nb-badge>
+  </nb-card-header>
+  <nb-card-body>
+    <canvas
+      baseChart
+      [data]="chartData"
+      [options]="chartOptions"
+      [type]="chartType"
+      [legend]="false"
+      *ngIf="!loading && !error"
+      style="height: 320px; width: 100%;"
+    ></canvas>
+  </nb-card-body>
+  <nb-card-footer class="text-end text-muted small fst-italic">
+    Останнє оновлення: {{ lastUpdated }}
+  </nb-card-footer>
+</nb-card>
+
+
+  <nb-layout-footer fixed class="footer-corporate">
+    <div>
+      &copy; 2025 ngx-admin-demo. Усі права захищені. |
+      <a href="#">Політика конфіденційності</a> |
+      <a href="#">Умови використання</a>
+    </div>
+  </nb-layout-footer>

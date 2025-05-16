@@ -1,0 +1,85 @@
+<nb-layout>
+  <nb-layout-header fixed class="header-corporate">
+    <div class="logo-container" (click)="searchTerm = ''; loadCoins();">
+      <img [src]="getAsset('/logo.png')" alt="ngx-admin-demo" class="logo-img" />
+      <span class="logo-text">ngx-admin-demo</span>
+    </div>
+
+    <div class="search-container">
+      <nb-form-field>
+        <nb-icon nbPrefix icon="search-outline"></nb-icon>
+        <input nbInput placeholder="Пошук криптовалют..." [(ngModel)]="searchTerm" (keyup.enter)="searchCoins()" />
+      </nb-form-field>
+    </div>
+  </nb-layout-header>
+
+  <nb-layout-column>
+    <div *ngIf="isLoading" class="spinner-container">
+      <nb-spinner status="primary" size="medium"></nb-spinner>
+    </div>
+
+    <nb-alert *ngIf="!isLoading && filterCryptocurrencies().length === 0" status="warning" outline>
+      Нічого не знайдено. Спробуйте інший запит.
+    </nb-alert>
+
+    <div class="crypto-list" *ngIf="!isLoading && filterCryptocurrencies().length > 0">
+      <div *ngFor="let crypto of filterCryptocurrencies()" class="crypto-card" (click)="selectCoin(crypto.id)" [@fadeIn]>
+        <div class="crypto-card-header">
+          <img [src]="crypto.image" alt="{{crypto.name}}" class="crypto-icon" />
+          <div class="crypto-name">{{ crypto.name }}</div>
+        </div>
+
+        <div class="price-info">
+          <div class="price-current" [ngClass]="getPriceChangeClass(crypto)">
+            {{ convertCurrency(crypto.current_price, 'USD') }}
+            <nb-icon *ngIf="getPriceChangeClass(crypto) === 'price-up'" icon="trending-up-outline" status="success"></nb-icon>
+            <nb-icon *ngIf="getPriceChangeClass(crypto) === 'price-down'" icon="trending-down-outline" status="danger"></nb-icon>
+          </div>
+          <div>Ціна (UAH): {{ convertCurrency(crypto.current_price, 'UAH') }}</div>
+          <div>Ринкова капіталізація: ${{ crypto.market_cap | number:'1.0-0' }}</div>
+
+          <div class="market-stats">
+            <div>Обсяг 24г: ${{ crypto.total_volume | number:'1.0-0' }}</div>
+            <div>Зміна 24г: <span [ngClass]="getPriceChangeClass(crypto)">{{ crypto.price_change_percentage_24h | number:'1.2-2' }}%</span></div>
+          </div>
+
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              [style.width.%]="
+                Math.min(
+                  Math.max(
+                    ((crypto.price_change_percentage_24h + 20) / 40) * 100,
+                    0
+                  ),
+                  100
+                )
+              "
+            ></div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <a
+            nbButton
+            size="small"
+            status="primary"
+            outline
+            [routerLink]="['/coin', crypto.id]"
+            class="btn-primary-outline"
+            (click)="$event.stopPropagation()"
+            >📈 Переглянути графік</a
+          >
+        </div>
+      </div>
+    </div>
+  </nb-layout-column>
+
+  <nb-layout-footer fixed class="footer-corporate">
+    <div>
+      &copy; 2025 ngx-admin-demo. Усі права захищені. |
+      <a href="#">Політика конфіденційності</a> |
+      <a href="#">Умови використання</a>
+    </div>
+  </nb-layout-footer>
+</nb-layout>

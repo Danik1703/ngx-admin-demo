@@ -1,0 +1,117 @@
+.chart-container {
+  overflow-x: auto;
+  max-width: 100%;
+  padding: 1.5rem;
+  background-color: var(--background-card);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-basic-color-3, #ddd);
+}
+
+.back-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #8e8e8e; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 15px;
+  position: absolute;
+  right: 10px; 
+  top: 70px; 
+}
+
+.back-button:hover {
+  background-color: #6a6a6a; 
+}
+
+.back-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+}
+
+.selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  font-size: 16px;
+}
+
+.selector label {
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 80px;
+  user-select: none;
+}
+
+.selector select {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--select-border);
+  background-color: var(--select-bg);
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.selector select:hover {
+  border-color: var(--select-border-hover);
+  background-color: #f9f9f9;
+}
+
+.selector select:focus {
+  outline: none;
+  box-shadow: 0 0 5px var(--select-focus-shadow);
+}
+
+.nb-card-header {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  border-bottom: 3px solid var(--color-success-500, #28a745);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  user-select: none;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto !important;
+  background: var(--background-card);
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08), inset 0 -3px 5px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+canvas:hover {
+  box-shadow: 0 12px 22px var(--shadow-heavy), inset 0 -3px 5px rgba(0, 0, 0, 0.05);
+}
+
+
+.footer-corporate {
+  background-color: var(--primary-color);
+  text-align: center;
+  padding: 1.5rem 1rem;
+  color: white;
+  font-size: 0.95rem;
+  user-select: none;
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer-corporate a {
+  color: #cce0ff;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+
+.footer-corporate a:hover,
+.footer-corporate a:focus {
+  color: #fff;
+  outline: none;
+}
