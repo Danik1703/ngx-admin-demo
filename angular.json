@@ -28,13 +28,21 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/version.json"
+              "src/version.json",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images",
+                "output": "assets/leaflet/images"
+              }
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/@nebular/theme/styles/prebuilt/corporate.css"
+              "node_modules/@nebular/theme/styles/prebuilt/corporate.css",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/leaflet/dist/leaflet.js"
+            ]
           },
           "configurations": {
             "production": {

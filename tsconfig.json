@@ -25,7 +25,8 @@
     "types": [
       "node",
       "jasmine"
-    ]
+    ],
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

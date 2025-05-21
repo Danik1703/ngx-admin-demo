@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,13 @@ import { CoinGeckoService } from './services/coin-gecko.service';
 import { AppRoutingModule } from './app-routing.module';  
 import { HttpClientModule } from '@angular/common/http';
 import { NbBadgeModule } from '@nebular/theme';
+import { NbToastrModule } from '@nebular/theme';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
+
 
 
 
@@ -53,7 +59,9 @@ import { OverlayModule } from '@angular/cdk/overlay';
     NgChartsModule,
     AppRoutingModule,
     HttpClientModule,
-
+    BrowserAnimationsModule,
+    NgxChartsModule,
+    LeafletModule,
     NbBadgeModule,
     NbCardModule,
     NbDialogModule.forRoot(),  
@@ -89,9 +97,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
     OverlayModule,
     NbSpinnerModule,
     NbAlertModule,
-    
+    NbToastrModule.forRoot()
   ],
   providers: [CoinGeckoService],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

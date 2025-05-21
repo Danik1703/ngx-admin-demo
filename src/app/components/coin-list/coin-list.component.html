@@ -23,63 +23,61 @@
     </nb-alert>
 
     <div class="crypto-list" *ngIf="!isLoading && filterCryptocurrencies().length > 0">
-      <div *ngFor="let crypto of filterCryptocurrencies()" class="crypto-card" (click)="selectCoin(crypto.id)" [@fadeIn]>
+      <div *ngFor="let crypto of filterCryptocurrencies()" class="crypto-card" (click)="selectCoin(crypto.id)"
+        [@fadeIn]>
         <div class="crypto-card-header">
-          <img [src]="crypto.image" alt="{{crypto.name}}" class="crypto-icon" />
+          <img [src]="crypto.image" alt="{{ crypto.name }}" class="crypto-icon" />
           <div class="crypto-name">{{ crypto.name }}</div>
         </div>
 
         <div class="price-info">
           <div class="price-current" [ngClass]="getPriceChangeClass(crypto)">
             {{ convertCurrency(crypto.current_price, 'USD') }}
-            <nb-icon *ngIf="getPriceChangeClass(crypto) === 'price-up'" icon="trending-up-outline" status="success"></nb-icon>
-            <nb-icon *ngIf="getPriceChangeClass(crypto) === 'price-down'" icon="trending-down-outline" status="danger"></nb-icon>
+            <nb-icon *ngIf="getPriceChangeClass(crypto) === 'price-up'" icon="trending-up-outline"
+              status="success"></nb-icon>
+            <nb-icon *ngIf="getPriceChangeClass(crypto) === 'price-down'" icon="trending-down-outline"
+              status="danger"></nb-icon>
           </div>
           <div>Ціна (UAH): {{ convertCurrency(crypto.current_price, 'UAH') }}</div>
-          <div>Ринкова капіталізація: ${{ crypto.market_cap | number:'1.0-0' }}</div>
+          <div>Ринкова капіталізація: ${{ crypto.market_cap | number : '1.0-0' }}</div>
 
           <div class="market-stats">
-            <div>Обсяг 24г: ${{ crypto.total_volume | number:'1.0-0' }}</div>
-            <div>Зміна 24г: <span [ngClass]="getPriceChangeClass(crypto)">{{ crypto.price_change_percentage_24h | number:'1.2-2' }}%</span></div>
+            <div>Обсяг 24г: ${{ crypto.total_volume | number : '1.0-0' }}</div>
+            <div>
+              Зміна 24г:
+              <span [ngClass]="getPriceChangeClass(crypto)">
+                {{ crypto.price_change_percentage_24h | number : '1.2-2' }}%
+              </span>
+            </div>
           </div>
 
           <div class="progress-bar">
-            <div
-              class="progress-fill"
-              [style.width.%]="
-                Math.min(
-                  Math.max(
-                    ((crypto.price_change_percentage_24h + 20) / 40) * 100,
-                    0
-                  ),
-                  100
-                )
-              "
-            ></div>
+            <div class="progress-fill" [style.width.%]="calculateProgress(crypto.price_change_percentage_24h)"></div>
           </div>
+
+          <canvas class="sparkline-chart" [attr.id]="'sparkline-' + crypto.id" width="100" height="30"></canvas>
         </div>
 
         <div class="card-footer">
-          <a
-            nbButton
-            size="small"
-            status="primary"
-            outline
-            [routerLink]="['/coin', crypto.id]"
-            class="btn-primary-outline"
-            (click)="$event.stopPropagation()"
-            >📈 Переглянути графік</a
-          >
+          <a nbButton size="small" status="primary" outline [routerLink]="['/coin', crypto.id]"
+            class="btn-primary-outline" (click)="$event.stopPropagation()">📈 Переглянути графік</a>
         </div>
       </div>
     </div>
-  </nb-layout-column>
+    <nb-card size="medium" status="basic" class="map-card">
+      <nb-card-header class="map-title">
+        🌍 Географія криптомонет
+      </nb-card-header>
 
-  <nb-layout-footer fixed class="footer-corporate">
-    <div>
-      &copy; 2025 ngx-admin-demo. Усі права захищені. |
-      <a href="#">Політика конфіденційності</a> |
-      <a href="#">Умови використання</a>
-    </div>
-  </nb-layout-footer>
-</nb-layout>
+      <nb-card-body class="map-body">
+        <div id="map" class="leaflet-map"></div>
+      </nb-card-body>
+    </nb-card>
+    
+    <nb-layout-footer fixed class="footer-corporate">
+      <div>
+        &copy; 2025 ngx-admin-demo. Усі права захищені. |
+        <a href="#">Політика конфіденційності</a> |
+        <a href="#">Умови використання</a>
+      </div>
+    </nb-layout-footer>
