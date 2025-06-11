@@ -29,8 +29,7 @@ export class CoinChartComponent implements OnInit, OnDestroy {
     private location: Location
   ) {}
 
-
-currencies = [
+  currencies = [
     { value: 'usd', label: 'USD' },
     { value: 'eur', label: 'EUR' },
     { value: 'uah', label: 'UAH' },
@@ -42,8 +41,6 @@ currencies = [
     { value: '7d', label: 'Тиждень' },
     { value: '30d', label: 'Місяць' },
   ];
-
-
 
   ngOnInit(): void {
     this.setChartOptions();
@@ -63,49 +60,65 @@ currencies = [
     clearInterval(this.chartRefreshInterval);
   }
 
-  setChartOptions(): void {
-    this.chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: {
-        duration: 1000,
-        easing: 'easeInOutCubic',
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#1a2138',
-          titleColor: '#ffffff',
-          bodyColor: '#ffffff',
-          borderColor: '#4b5bdc',
-          borderWidth: 1,
-          padding: 10,
-          cornerRadius: 6,
-          callbacks: {
-            label: (tooltipItem) =>
-              `Ціна: ${tooltipItem.raw} ${this.selectedCurrency.toUpperCase()}`,
-          },
+ setChartOptions(): void {
+  this.chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: {
+      duration: 1000,
+      easing: 'easeInOutCubic',
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        enabled: true,
+        backgroundColor: '#222c55',
+        titleColor: '#a4a9f8',
+        bodyColor: '#e0e6ff',
+        borderColor: '#4b5bdc',
+        borderWidth: 1,
+        padding: 10,
+        cornerRadius: 8,
+        displayColors: false,
+        titleFont: {
+          family: "'Roboto', sans-serif",
+          size: 14,
+          weight: '500',
+        },
+        bodyFont: {
+          family: "'Roboto', sans-serif",
+          size: 13,
+          weight: '400',
+        },
+        callbacks: {
+          title: () => '',
+          label: (context) => `Ціна: ${context.parsed.y.toFixed(4)} ${this.selectedCurrency.toUpperCase()}`,
         },
       },
-      scales: {
-        x: { display: false },
-        y: { display: false },
+    },
+    scales: {
+      x: { display: false },
+      y: { display: false },
+    },
+    elements: {
+      line: {
+        tension: 0.4,
+        borderColor: '#5a6ff0',
+        borderWidth: 3,
+        backgroundColor: 'rgba(90, 111, 240, 0.15)',
       },
-      elements: {
-        line: {
-          tension: 0.4,
-          borderColor: '#5a6ff0',
-          borderWidth: 3,
-          backgroundColor: 'rgba(90, 111, 240, 0.1)',
-        },
-        point: {
-          radius: 0,
-          hoverRadius: 5,
-          backgroundColor: '#5a6ff0',
-        },
+      point: {
+        radius: 0,
+        hoverRadius: 6,
+        hoverBorderWidth: 3,
+        hoverBorderColor: '#7c8fff',
+        backgroundColor: '#5a6ff0',
+        hoverBackgroundColor: '#7c8fff',
       },
-    };
-  }
+    },
+  };
+}
+
 
   onCurrencyChange(): void {
     this.setChartOptions();
@@ -119,7 +132,7 @@ currencies = [
 
   getDaysFromPeriod(period: string): number {
     switch (period) {
-      case '1m': return 1 / 1440; 
+      case '1m': return 1 / 1440;
       case '24h': return 1;
       case '7d': return 7;
       case '30d': return 30;
@@ -180,11 +193,8 @@ currencies = [
 
             this.lastUpdated = new Date().toLocaleString();
           },
-          error: () => {
-            console.warn('Не удалось оновити графік');
-          },
         });
-    }, 3000); 
+    }, 3000);
   }
 
   goBack(): void {

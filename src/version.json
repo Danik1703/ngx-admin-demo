@@ -1,13 +1,13 @@
 {
     "dirty": true,
-    "raw": "6baf9fc-dirty",
-    "hash": "6baf9fc",
+    "raw": "3ef6f4b-dirty",
+    "hash": "3ef6f4b",
     "distance": null,
     "tag": null,
     "semver": null,
-    "suffix": "6baf9fc-dirty",
+    "suffix": "3ef6f4b-dirty",
     "semverString": null,
-    "name": "crypto-tracker",
-    "version": "1.0.1",
+    "name": "ngx-admin-demo",
+    "version": "1.0.0",
     "main": "main.js"
 }

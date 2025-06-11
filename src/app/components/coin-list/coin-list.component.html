@@ -1,14 +1,20 @@
 <nb-layout>
   <nb-layout-header fixed class="header-corporate">
-    <div class="logo-container" (click)="searchTerm = ''; loadCoins();">
-      <img [src]="getAsset('/logo.png')" alt="ngx-admin-demo" class="logo-img" />
-      <span class="logo-text">ngx-admin-demo</span>
+    <div class="logo-container" (click)="searchTerm=''; loadCoins();">
+      <img [src]="getAsset('/logo.png')" alt="Logo" class="logo-img" />
+      <span class="logo-text">Crypto Tracker</span>
     </div>
 
     <div class="search-container">
       <nb-form-field>
         <nb-icon nbPrefix icon="search-outline"></nb-icon>
-        <input nbInput placeholder="Пошук криптовалют..." [(ngModel)]="searchTerm" (keyup.enter)="searchCoins()" />
+        <input
+          nbInput
+          placeholder="Пошук криптовалют..."
+          [(ngModel)]="searchTerm"
+          (keyup.enter)="searchCoins()"
+          autocomplete="off"
+        />
       </nb-form-field>
     </div>
   </nb-layout-header>
@@ -22,9 +28,13 @@
       Нічого не знайдено. Спробуйте інший запит.
     </nb-alert>
 
-    <div class="crypto-list" *ngIf="!isLoading && filterCryptocurrencies().length > 0">
-      <div *ngFor="let crypto of filterCryptocurrencies()" class="crypto-card" (click)="selectCoin(crypto.id)"
-        [@fadeIn]>
+    <div *ngIf="!isLoading && filterCryptocurrencies().length > 0" class="crypto-list">
+      <div
+        *ngFor="let crypto of filterCryptocurrencies()"
+        class="crypto-card"
+        (click)="selectCoin(crypto.id)"
+        [attr.aria-selected]="selectedCoinId === crypto.id"
+      >
         <div class="crypto-card-header">
           <img [src]="crypto.image" alt="{{ crypto.name }}" class="crypto-icon" />
           <div class="crypto-name">{{ crypto.name }}</div>
@@ -33,51 +43,49 @@
         <div class="price-info">
           <div class="price-current" [ngClass]="getPriceChangeClass(crypto)">
             {{ convertCurrency(crypto.current_price, 'USD') }}
-            <nb-icon *ngIf="getPriceChangeClass(crypto) === 'price-up'" icon="trending-up-outline"
-              status="success"></nb-icon>
-            <nb-icon *ngIf="getPriceChangeClass(crypto) === 'price-down'" icon="trending-down-outline"
-              status="danger"></nb-icon>
+            <nb-icon *ngIf="getPriceChangeClass(crypto) === 'price-up'" icon="trending-up-outline" status="success"></nb-icon>
+            <nb-icon *ngIf="getPriceChangeClass(crypto) === 'price-down'" icon="trending-down-outline" status="danger"></nb-icon>
           </div>
+
           <div>Ціна (UAH): {{ convertCurrency(crypto.current_price, 'UAH') }}</div>
-          <div>Ринкова капіталізація: ${{ crypto.market_cap | number : '1.0-0' }}</div>
+          <div>Ринкова капіталізація: ${{ crypto.market_cap | number:'1.0-0' }}</div>
 
           <div class="market-stats">
-            <div>Обсяг 24г: ${{ crypto.total_volume | number : '1.0-0' }}</div>
+            <div>Обсяг 24г: ${{ crypto.total_volume | number:'1.0-0' }}</div>
             <div>
               Зміна 24г:
               <span [ngClass]="getPriceChangeClass(crypto)">
-                {{ crypto.price_change_percentage_24h | number : '1.2-2' }}%
+                {{ crypto.price_change_percentage_24h | number:'1.2-2' }}%
               </span>
             </div>
           </div>
 
-          <div class="progress-bar">
+          <div class="progress-bar" aria-label="Зміна ціни за 24 години">
             <div class="progress-fill" [style.width.%]="calculateProgress(crypto.price_change_percentage_24h)"></div>
           </div>
 
-          <canvas class="sparkline-chart" [attr.id]="'sparkline-' + crypto.id" width="100" height="30"></canvas>
+          <canvas
+            class="sparkline-chart"
+            [attr.id]="'sparkline-' + crypto.id"
+            width="120"
+            height="35"
+            aria-hidden="true"
+          ></canvas>
         </div>
 
         <div class="card-footer">
-          <a nbButton size="small" status="primary" outline [routerLink]="['/coin', crypto.id]"
-            class="btn-primary-outline" (click)="$event.stopPropagation()">📈 Переглянути графік</a>
+          <a
+            nbButton
+            size="small"
+            status="primary"
+            outline
+            [routerLink]="['/coin', crypto.id]"
+            class="btn-primary-outline"
+            (click)="$event.stopPropagation()"
+            >📈 Переглянути графік</a
+          >
         </div>
       </div>
     </div>
-    <nb-card size="medium" status="basic" class="map-card">
-      <nb-card-header class="map-title">
-        🌍 Географія криптомонет
-      </nb-card-header>
-
-      <nb-card-body class="map-body">
-        <div id="map" class="leaflet-map"></div>
-      </nb-card-body>
-    </nb-card>
-    
-    <nb-layout-footer fixed class="footer-corporate">
-      <div>
-        &copy; 2025 ngx-admin-demo. Усі права захищені. |
-        <a href="#">Політика конфіденційності</a> |
-        <a href="#">Умови використання</a>
-      </div>
-    </nb-layout-footer>
+  </nb-layout-column>
+</nb-layout>

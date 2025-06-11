@@ -82,7 +82,7 @@
 canvas {
   max-width: 100%;
   height: auto !important;
-  background: var(--background-card);
+  background: var(--background-card); 
   border-radius: 14px;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08), inset 0 -3px 5px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease;
@@ -92,6 +92,25 @@ canvas:hover {
   box-shadow: 0 12px 22px var(--shadow-heavy), inset 0 -3px 5px rgba(0, 0, 0, 0.05);
 }
 
+.chartjs-tooltip {
+  pointer-events: none;
+  position: absolute;
+  background: #222c55;
+  border: 1px solid #4b5bdc;
+  border-radius: 8px;
+  color: #e0e6ff;
+  padding: 10px;
+  font-size: 13px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  font-weight: 400;
+  transition: opacity 0.3s ease;
+  user-select: none;
+}
+
+.chartjs-tooltip .label {
+  font-weight: 500;
+  color: #a4a9f8;
+}
 
 .footer-corporate {
   background-color: var(--primary-color);

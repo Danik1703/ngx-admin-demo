@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CoinChartComponent } from './components/coin-chart/coin-chart.component';  
 import { CoinListComponent } from './components/coin-list/coin-list.component';
 import { CoinSearchComponent } from './components/coin-search/coin-search.component';
+import { MapChartComponent } from './map-chart/map-chart.component';
 import { CoinGeckoService } from './services/coin-gecko.service';
 import { AppRoutingModule } from './app-routing.module';  
 import { HttpClientModule } from '@angular/common/http';
@@ -51,6 +52,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     CoinListComponent,
     CoinChartComponent,
     CoinSearchComponent,
+    MapChartComponent,
   ],
   imports: [
     BrowserModule,

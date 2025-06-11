@@ -1,0 +1,37 @@
+<div class="map-dashboard-wrapper">
+  <nb-card class="dashboard-sidebar" accent="info">
+    <nb-card-header class="dashboard-title">📍 Міста</nb-card-header>
+    <nb-card-body class="city-list">
+      <nb-list>
+        <nb-list-item
+          *ngFor="let city of cities; let i = index"
+          [ngClass]="{ active: i === selectedCityIndex }"
+          (click)="selectCity(i)"
+          class="city-card"
+        >
+          <div class="city-name">{{ city.name }}</div>
+          <div class="city-prices">
+            <div>BTC: <strong>{{ city.bitcoin }}</strong></div>
+            <div>ETH: <strong>{{ city.ethereum }}</strong></div>
+          </div>
+        </nb-list-item>
+      </nb-list>
+    </nb-card-body>
+  </nb-card>
+
+  <div class="map-container">
+    <div id="map" class="leaflet-map"></div>
+  </div>
+</div>
+
+
+<nb-layout-footer fixed class="footer-corporate fixed">
+  <nav class="fixed">
+    <div>
+      © 2025 ngx-admin-demo. Усі права захищені. | 
+      <a href="#">Політика конфіденційності</a> | 
+      <a href="#">Умови використання</a>
+    </div>
+  </nav>
+</nb-layout-footer>
+

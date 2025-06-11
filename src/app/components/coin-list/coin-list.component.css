@@ -1,362 +1,194 @@
 :host {
   display: block;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #374151;
+  background-color: #f7f9fc;
+  min-height: 100vh;
 }
 
-.crypto-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  padding-bottom: 2rem;
-  animation: fadeIn 0.5s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.crypto-card {
-  background-color: var(--bg-card);
-  border-radius: var(--border-radius);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-  padding: 1.25rem;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-  user-select: none;
-  margin-bottom: 1rem;
-}
-
-.crypto-card:hover {
-  box-shadow: 0 10px 28px rgba(51, 102, 255, 0.28);
-  transform: translateY(-5px);
-}
-
-.crypto-card-header {
+.header-corporate {
+  background-color: #3366ff;
   display: flex;
   align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 1rem;
-}
+  padding: 0 1.5rem;
+  box-shadow: 0 2px 6px rgb(51 102 255 / 0.3);
+  color: #fff;
+  height: 64px;
 
-.crypto-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  box-shadow: 0 0 12px rgba(0, 214, 143, 0.35);
-  background-color: #f5f8ff;
-  object-fit: contain;
-  transition: box-shadow 0.3s ease;
-}
+  .logo-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 
-.crypto-card:hover .crypto-icon {
-  box-shadow: 0 0 20px rgba(0, 214, 143, 0.6);
-}
+    .logo-img {
+      height: 36px;
+      margin-right: 0.75rem;
+      border-radius: 6px;
+      filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.15));
+    }
 
-.crypto-name {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  user-select: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.price-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-}
-
-.price-current {
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.price-up {
-  color: var(--accent-color);
-  animation: priceUp 0.5s ease-in-out forwards;
-}
-
-.price-down {
-  color: var(--danger-color);
-  animation: priceDown 0.5s ease-in-out forwards;
-}
-
-@keyframes priceUp {
-  0% {
-    transform: scale(1.2);
-    opacity: 0.8;
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+    }
   }
 
-  100% {
-    transform: scale(1);
-    opacity: 1;
+  .search-container {
+    flex-grow: 1;
+    max-width: 400px;
+    margin-left: auto;
+
+    nb-form-field {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
+      padding: 0 0.75rem;
+
+      input {
+        border: none;
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+        color: #374151;
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 8px #3366ff;
+        }
+      }
+
+      nb-icon {
+        color: #3366ff;
+      }
+    }
   }
-}
-
-@keyframes priceDown {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.8;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.market-stats {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  display: flex;
-  justify-content: space-between;
-  gap: 1.2rem;
-}
-
-.progress-bar {
-  background-color: #dbe4ff;
-  border-radius: 16px;
-  height: 10px;
-  width: 100%;
-  overflow: hidden;
-  margin-top: 0.6rem;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #00d68f, #3366ff);
-  transition: width 0.6s ease;
-  border-radius: 16px 0 0 16px;
-}
-
-.card-footer {
-  margin-top: auto;
-  padding-top: 1rem;
-  text-align: right;
-}
-
-canvas {
-  transition: opacity 0.8s ease;
-  border-radius: 8px;
-  background-color: var(--bg-card);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.btn-primary-outline {
-  border: 2px solid var(--primary-color);
-  background: transparent;
-  color: var(--primary-color);
-  font-weight: 600;
-  padding: 0.5rem 1.2rem;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: background-color 0.35s ease, color 0.35s ease, box-shadow 0.3s ease;
-  user-select: none;
-}
-
-.btn-primary-outline:hover,
-.btn-primary-outline:focus {
-  background-color: var(--primary-color);
-  color: white;
-  box-shadow: 0 0 12px var(--primary-color);
-  outline: none;
 }
 
 .spinner-container {
   display: flex;
   justify-content: center;
-  padding: 3rem 0;
+  padding: 2rem 0;
 }
 
-.header-corporate {
-  background-color: var(--primary-color);
+.crypto-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.6rem;
+  padding: 2rem 1rem;
+}
+
+.crypto-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
+  padding: 1.2rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  height: 64px;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  flex-direction: column;
   cursor: pointer;
-  user-select: none;
-}
+  transition: box-shadow 0.3s ease, transform 0.15s ease;
 
-.logo-img {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  box-shadow: 0 0 12px var(--primary-color);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.logo-img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px var(--primary-color);
-}
-
-.logo-text {
-  font-weight: 700;
-  font-size: 1.75rem;
-  color: #222;
-  letter-spacing: 1.2px;
-  user-select: none;
-  transition: color 0.3s ease;
-}
-
-.logo-container:hover .logo-text {
-  color: #111;
-}
-
-.search-container {
-  max-width: 380px;
-  flex-grow: 1;
-  margin-left: 2rem;
-}
-
-.search-container nb-form-field {
-  width: 100%;
-}
-
-.search-container input[nbInput] {
-  border-radius: var(--border-radius);
-  padding: 0.65rem 1.1rem;
-  font-size: 1rem;
-  border: none;
-  box-shadow: 0 0 10px rgba(51, 102, 255, 0.25);
-  transition: box-shadow 0.3s ease;
-}
-
-.search-container input[nbInput]:focus {
-  box-shadow: 0 0 16px var(--primary-color);
-  outline: none;
-}
-
-.map-body {
-  margin-top: 2rem;
-  width: 100%;
-  height: 400px;
-  border-radius: var(--border-radius);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.leaflet-map {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  animation: fadeInMap 0.8s ease forwards;
-  border-radius: var(--border-radius);
-  user-select: none;
-}
-
-@keyframes fadeInMap {
-  to {
-    opacity: 1;
-  }
-}
-
-.leaflet-container {
-  font-family: 'Roboto', sans-serif;
-  background: #fff;
-}
-
-
-.custom-marker-icon {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
-.custom-marker-icon .pulse {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 16px;
-  height: 16px;
-  background: rgba(51, 102, 255, 0.6);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  animation: pulseAnim 2s infinite ease-out;
-  filter: drop-shadow(0 0 4px rgba(51, 102, 255, 0.8));
-  z-index: 1;
-}
-
-.custom-marker-icon .pin {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  background: #3366ff;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 6px #3366ff;
-  z-index: 2;
-}
-
-@keyframes pulseAnim {
-  0% {
-    transform: translate(-50%, -50%) scale(0.7);
-    opacity: 1;
+  &:hover,
+  &[aria-selected='true'] {
+    box-shadow: 0 8px 20px rgb(51 102 255 / 0.3);
+    transform: translateY(-4px);
   }
 
-  70% {
-    transform: translate(-50%, -50%) scale(1.4);
-    opacity: 0;
+  .crypto-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+
+    .crypto-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+      background-color: #fff;
+    }
+
+    .crypto-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1f2937;
+    }
   }
 
-  100% {
-    opacity: 0;
+  .price-info {
+    flex-grow: 1;
+
+    .price-current {
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+
+      &.price-up {
+        color: #00d68f;
+      }
+
+      &.price-down {
+        color: #ff3860;
+      }
+    }
+
+    div {
+      margin: 0.3rem 0;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .market-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-top: 0.8rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 9999px;
+      margin: 0.8rem 0 1rem 0;
+      overflow: hidden;
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #00d68f, #03b77d);
+        border-radius: 9999px;
+        transition: width 0.4s ease;
+      }
+    }
+
+    canvas.sparkline-chart {
+      width: 120px;
+      height: 35px;
+      margin-top: 0.6rem;
+      display: block;
+    }
+  }
+
+  .card-footer {
+    margin-top: auto;
+    text-align: right;
+
+    a.btn-primary-outline {
+      font-weight: 600;
+      color: #3366ff;
+      border-color: #3366ff;
+      border-radius: 8px;
+      padding: 0.4rem 0.9rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &:hover {
+        background-color: #3366ff;
+        color: white;
+      }
+    }
   }
 }
-
-.footer-corporate {
-  background-color: var(--primary-color);
-  text-align: center;
-  padding: 1.5rem 1rem;
-  color: white;
-  font-size: 0.95rem;
-  user-select: none;
-  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.footer-corporate a {
-  color: #cce0ff;
-  text-decoration: underline;
-  transition: color 0.3s ease;
-  user-select: none;
-}
-
-.footer-corporate a:hover,
-.footer-corporate a:focus {
-  color: #fff;
-  outline: none;
-}
-
